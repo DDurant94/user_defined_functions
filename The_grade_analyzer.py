@@ -44,51 +44,57 @@ def list_of_grades(grades):
   
 
 
+def grade_analyzer(user_input):
+  grades = []
 
-grades = []
+  while True:
+    users_choice = input("Do you want to [A]dd, [R]emove, [V]iew, [E]xit? ").upper()
+
+    if users_choice == "A":
+      grades_to_add = int(input("How many grades do you want to add? "))
+      for i in range(grades_to_add):
+        grades_added = int(input(f"Enter in grades one at a time: \n {i+1}. "))
+        grades.append(grades_added)
+
+    elif users_choice == "R":
+      grades_to_remove = int(input("How many grades do you want to remove? "))
+      for i in range(grades_to_remove):
+        grades_removed = int(input(f"Enter in grades one at a time: \n {i+1}. "))
+        grades.append(grades_removed)
+    elif users_choice == "V":
+      while True:
+        users_choice2 = input("Do you want to view [A]verage, [H]ighest/lowest, [L]ist or [E]xit ").upper()
+        if users_choice2 == "A":
+          average_grade(grades)
+        elif users_choice2 == "H":
+          high_low_grade(grades)
+        elif users_choice2 == "L":
+          while True:
+            users_choice3 = input("Do you want to see [S]cores, [L]etter, [B]oth or [E]xit? ").upper()
+            if users_choice3 == "S":
+              list_of_grades(grades)
+            elif users_choice3 == "L":
+              adding_letters(grades)
+              list_of_grades(grades)
+            elif users_choice3 == "B":
+              pass
+            elif users_choice3 == "E":
+              break
+        elif users_choice2 == "E":
+          break
+        else:
+          print("Invalid input")
+    elif users_choice == "E":
+      break
+
+
 
 while True:
-  users_choice = input("Do you want to [A]dd, [R]emove, [V]iew, [E]xit? ").upper()
-
-  if users_choice == "A":
-    grades_to_add = int(input("How many grades do you want to add? "))
-    for i in range(grades_to_add):
-      grades_added = int(input(f"Enter in grades one at a time: \n {i+1}. "))
-      grades.append(grades_added)
-
-  elif users_choice == "R":
-    grades_to_remove = int(input("How many grades do you want to remove? "))
-    for i in range(grades_to_remove):
-      grades_removed = int(input(f"Enter in grades one at a time: \n {i+1}. "))
-      grades.append(grades_removed)
-  elif users_choice == "V":
-    while True:
-      users_choice2 = input("Do you want to view [A]verage, [H]ighest/lowest, [L]ist or [E]xit ").upper()
-      if users_choice2 == "A":
-        average_grade(grades)
-      elif users_choice2 == "H":
-        high_low_grade(grades)
-      elif users_choice2 == "L":
-        while True:
-          users_choice3 = input("Do you want to see [S]cores, [L]etter, [B]oth or [E]xit? ").upper()
-          if users_choice3 == "S":
-            list_of_grades(grades)
-          elif users_choice3 == "L":
-            adding_letters(grades)
-            list_of_grades(grades)
-          elif users_choice3 == "B":
-            pass
-          elif users_choice3 == "E":
-            break
-      elif users_choice2 == "E":
-        break
-      else:
-        print("Invalid input")
-  elif users_choice == "E":
+  user_input = input("Are you ready to start entering in your grades? [Y/N] ").upper()
+  if user_input == "Y":
+    grade_analyzer(user_input)
+  elif user_input == "N":
+    print("Thank you come again!")
     break
-
-
-
-
-
-letter_grades = ["A" if x > 89 else "B" if x <= 89 and x > 79 else "C" if x <= 79 and x > 69 else "D" if x <= 69 and x > 59 else "F" for x in grades]
+  else:
+    print("Invalid input!")
